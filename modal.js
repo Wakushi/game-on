@@ -8,12 +8,13 @@ class SignUpModalElement {
 
   #bindEvents() {
     this.modalBtn.forEach((btn) =>
-      btn.addEventListener("click", () => this.launchModal())
+      btn.addEventListener("click", () => this.#launchModal())
     )
-    this.clodeModalBtn.addEventListener("click", () => this.closeModal())
+    this.clodeModalBtn.addEventListener("click", () => this.#closeModal())
+    document.addEventListener("formSubmit", (e) => this.#onFormSubmit(e))
   }
 
-  launchModal() {
+  #launchModal() {
     this.modal.style.display = "block"
     App.toggleScroll()
     if (!this.signUpForm) {
@@ -21,13 +22,13 @@ class SignUpModalElement {
     }
   }
 
-  closeModal() {
+  #closeModal() {
     this.confirmationElement?.remove()
     this.modal.style.display = "none"
     App.toggleScroll()
   }
 
-  onFormSubmit(e) {
+  #onFormSubmit(e) {
     this.confirmationElement = document.createElement("div")
     this.confirmationElement.classList.add("confirmation")
     this.confirmationElement.innerHTML = `
@@ -41,7 +42,7 @@ class SignUpModalElement {
       .appendChild(this.confirmationElement)
     this.confirmationElement
       .querySelector(".confirmation-close")
-      .addEventListener("click", () => this.closeModal())
+      .addEventListener("click", () => this.#closeModal())
   }
 }
 
@@ -87,9 +88,10 @@ class Form {
     this.inputs.forEach((input) => {
       input.addEventListener("input", (e) => this.#onChange(e))
       if (input.type !== "radio" && input.type !== "checkbox") {
-        input.addEventListener("blur", (e) =>
+        input.addEventListener("blur", (e) => {
           this.#checkFieldValidity(e.target.name)
-        )
+          this.#checkFormValidity()
+        })
       }
     })
   }
@@ -197,7 +199,6 @@ class Header {
 class App {
   static init() {
     const signupModal = new SignUpModalElement()
-    document.addEventListener("formSubmit", (e) => signupModal.onFormSubmit(e))
     new Header()
   }
 
