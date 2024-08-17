@@ -32,10 +32,8 @@ class SignUpModalElement {
     this.confirmationElement = document.createElement("div")
     this.confirmationElement.classList.add("confirmation")
     this.confirmationElement.innerHTML = `
-      <div class="confirmation">
         <p>Merci pour votre inscription ${e.detail.firstName} !</p>
         <button class="confirmation-close">Fermer</button>
-      </div>
     `
     this.modal
       .querySelector(".modal-body")
