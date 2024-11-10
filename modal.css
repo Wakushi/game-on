@@ -92,11 +92,14 @@ header {
   min-height: 140px;
 }
 
+.main-navbar a {
+  padding: 0.3rem 1rem;
+}
+
 .main-navbar a:hover {
   color: #fff;
   text-decoration: underline;
   background-color: #fe142f;
-  padding: 0.3rem 1rem;
   border-radius: 10px;
 }
 
@@ -120,7 +123,7 @@ header {
   font-size: 3rem;
 }
 
-@media (width >= 1024px) {
+@media (width > 1024px) {
   header .header-logo {
     max-width: 270px;
   }
