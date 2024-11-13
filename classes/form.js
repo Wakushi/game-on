@@ -10,6 +10,8 @@ export default class Form {
     this.inputs = this.form.querySelectorAll("input")
   }
 
+  // registerFields() registers all form field data on the Form class object
+  // to manage their value and validity
   #registerFields() {
     this.fields = []
     this.inputs.forEach((input) => {
@@ -56,9 +58,13 @@ export default class Form {
     })
   }
 
+  // checkFieldValidity() runs for input fields and used registered fields data to
+  // verify if the condition for each field is met
   #checkFieldValidity(fieldName) {
     const field = this.fields.find((f) => f.name === fieldName)
+
     if (!field) return
+
     switch (field.type) {
       case "text":
         field.error =
@@ -112,6 +118,7 @@ export default class Form {
       formData[field.name] = field.value
     })
     this.form.reset()
+    this.#registerFields()
     this.#toggleSubmitButton(true)
     this.#emitFormSubmit(formData)
   }

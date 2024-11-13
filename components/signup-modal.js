@@ -27,6 +27,7 @@ export default class SignUpModalElement {
     }
   }
 
+  // This method handle the closing of the modal
   #closeModal() {
     this.confirmationElement?.remove()
     this.modal.style.display = "none"
@@ -34,6 +35,8 @@ export default class SignUpModalElement {
     App.toggleScroll()
   }
 
+  // When the form is submitted, a custom “formSubmit" event is dispatched and
+  // it triggers this method to create a confirmation screen with the user's name
   #onFormSubmit(e) {
     this.confirmationElement = document.createElement("div")
     this.confirmationElement.classList.add("confirmation")
